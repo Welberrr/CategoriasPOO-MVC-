@@ -1,0 +1,23 @@
+-- Criando a tabela categorias
+CREATE TABLE categorias (
+    id_categoria SERIAL PRIMARY KEY,
+    nome_categoria VARCHAR(150),
+    descricao VARCHAR(250)
+);
+
+-- Criando a tabela livro
+CREATE TABLE livro (
+    id_livro SERIAL PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    id_categoria INT NOT NULL,
+    CONSTRAINT fk_id_categoria FOREIGN KEY (id_categoria) REFERENCES categorias(id_categoria)
+);
+
+ALTER TABLE livro
+DROP CONSTRAINT fk_id_categoria;
+
+ALTER TABLE livro
+ADD CONSTRAINT fk_id_categoria FOREIGN KEY (id_categoria)
+REFERENCES categorias(id_categoria) ON DELETE CASCADE;
+
+select * from categorias
