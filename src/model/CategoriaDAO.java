@@ -16,7 +16,7 @@ public class CategoriaDAO {
 
     // Adiciona uma nova categoria
     public void adicionarCategoria(Categoria categoria) {
-        String sql = "INSERT INTO categorias (nome_categoria, descricao) VALUES (?, ?)";
+        String sql = "INSERT INTO categoria (nome_categoria, descricao) VALUES (?, ?)";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getNomeCategoria());
@@ -29,7 +29,7 @@ public class CategoriaDAO {
 
     // Atualiza uma categoria existente
     public void atualizarCategoria(Categoria categoria) {
-        String sql = "UPDATE categorias SET nome_categoria = ?, descricao = ? WHERE id_categoria = ?";
+        String sql = "UPDATE categoria SET nome_categoria = ?, descricao = ? WHERE id_categoria = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setString(1, categoria.getNomeCategoria());
@@ -43,7 +43,7 @@ public class CategoriaDAO {
 
     // Deleta uma categoria pelo ID
     public void deletarCategoria(int idCategoria) {
-        String sql = "DELETE FROM categorias WHERE id_categoria = ?";
+        String sql = "DELETE FROM categoria WHERE id_categoria = ?";
 
         try (PreparedStatement stmt = connection.prepareStatement(sql)) {
             stmt.setInt(1, idCategoria);
@@ -56,7 +56,7 @@ public class CategoriaDAO {
     // Lista categorias e seus livros
     public List<Categoria> listarCategoriasComLivros() {
         String sql = "SELECT c.id_categoria, c.nome_categoria, c.descricao, l.id_livro, l.nome " +
-                     "FROM categorias c LEFT JOIN livro l ON c.id_categoria = l.id_categoria";
+                     "FROM categoria c LEFT JOIN livro l ON c.id_categoria = l.id_categoria";
         List<Categoria> categorias = new ArrayList<>();
 
         try (Statement stmt = connection.createStatement();
